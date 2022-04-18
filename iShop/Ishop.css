@@ -1,0 +1,18 @@
+﻿.IshopBlock
+{
+  border: double gray 3px;
+  max-width: 50%;
+  padding: 1rem 2rem;
+  background-color: #F0F0F0;
+  margin: auto;
+}
+
+.IshopBlock .row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.IshopBlock .toy-container {
+  width: calc((100% - 2rem) / 3);
+}
