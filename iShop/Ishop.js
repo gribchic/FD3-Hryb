@@ -19,9 +19,8 @@
 
     var toysCode=this.props.toys.map( v =>
        
-        React.DOM.div({className:'toy-container'},
+        React.DOM.div({className:'toy-container', key:v.id},
          React.createElement(Toy, {
-          key:v.id,
           name:v.name,
           price:v.price,
           amount:v.amount,
