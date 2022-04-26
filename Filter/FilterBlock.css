@@ -1,0 +1,12 @@
+.FilterBlock {
+    width: 300px;
+    margin: auto;
+}
+.FilterBlock .list-wrapper {
+    max-height: 7rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-y: auto;
+    
+}
