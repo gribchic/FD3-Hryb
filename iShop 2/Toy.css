@@ -1,0 +1,17 @@
+.Toy h2
+{
+  text-align: center;
+}
+
+
+.Toy .img {
+  max-width: 100%;
+}
+
+.Toy .description {
+  display: flex;
+  justify-content: space-between;
+}
+.Toy.selected {
+  border: 1px solid green;
+}
