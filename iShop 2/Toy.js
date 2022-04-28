@@ -15,15 +15,13 @@ let Toy = React.createClass({
 
   onSelectToyHandler: function (event) {
     if (event.target.tagName === 'BUTTON') {
-      return;
+      event.stopPropogation();
     };
 
-    console.log('select');
     this.props.onSelectToy(this.props.id);
   },
 
   onDeleteToyHandler: function (event) {
-    console.log('delete');
     this.props.onDeleteToy(this.props.id);
   },
 
