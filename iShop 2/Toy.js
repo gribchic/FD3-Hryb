@@ -15,7 +15,8 @@ let Toy = React.createClass({
 
   onSelectToyHandler: function (event) {
     if (event.target.tagName === 'BUTTON') {
-      event.stopPropogation();
+      event.stopPropagation();
+      return;
     };
 
     this.props.onSelectToy(this.props.id);

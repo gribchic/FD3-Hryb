@@ -28,16 +28,13 @@
 
   onDeleteToyHandler: function (id) {
     if (confirm('are you sure you want to delete this toy?')) {
-      console.log(id);
       this.setState((prevState) => {
-        console.log(prevState.toys.filter(toy => toy.id !== id));
         return {toys: prevState.toys.filter(toy => toy.id !== id)}
       } )
     }
   },
 
   render: function () {
-    //console.log(this.state.toys);
 
     if(this.state.toys.length===0) {
       return React.DOM.div({ className: 'IshopBlock' },
