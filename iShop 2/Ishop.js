@@ -29,18 +29,18 @@
   onDeleteToyHandler: function (id) {
     if (confirm('are you sure you want to delete this toy?')) {
       this.setState((prevState) => {
-        return {toys: prevState.toys.filter(toy => toy.id !== id)}
-      } )
+        return { toys: prevState.toys.filter(toy => toy.id !== id) }
+      })
     }
   },
 
   render: function () {
 
-    if(this.state.toys.length===0) {
+    if (this.state.toys.length === 0) {
       return React.DOM.div({ className: 'IshopBlock' },
-      React.DOM.h1({ className: 'h1' }, this.props.shopName),
-      React.DOM.div({ className: 'alert' }, 'Sorry. There are no toys!'),
-    );
+        React.DOM.h1({ className: 'h1' }, this.props.shopName),
+        React.DOM.div({ className: 'alert' }, 'Sorry. There are no toys!'),
+      );
     }
 
     var toysCode = this.state.toys.map(v =>
