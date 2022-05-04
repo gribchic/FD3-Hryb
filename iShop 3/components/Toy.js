@@ -1,3 +1,7 @@
+var React = require('react');
+
+require('./Toy.css');
+
 let Toy = React.createClass({
 
   displayName: 'Toy',
@@ -41,3 +45,5 @@ let Toy = React.createClass({
     )
   }
 });
+
+module.exports = Toy;

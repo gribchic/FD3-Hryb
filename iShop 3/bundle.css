@@ -1,0 +1,43 @@
+.IshopBlock
+{
+  border: double gray 3px;
+  max-width: 50%;
+  padding: 1rem 2rem;
+  background-color: #F0F0F0;
+  margin: auto;
+}
+
+.IshopBlock .row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.IshopBlock .toy-container {
+  width: calc((100% - 2rem) / 3);
+}
+
+.IshopBlock .alert {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}.Toy h2
+{
+  text-align: center;
+}
+
+
+.Toy .img {
+  max-width: 100%;
+}
+
+.Toy .description {
+  display: flex;
+  justify-content: space-between;
+}
+.Toy.selected {
+  border: 1px solid green;
+}
+/*# sourceMappingURL=bundle.css.map*/

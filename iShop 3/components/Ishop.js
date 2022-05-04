@@ -1,6 +1,12 @@
-﻿var ToysBlock = React.createClass({
+﻿var React = require('react');
 
-  displayName: 'ToysBlock',
+require('./Ishop.css');
+
+var Toy = require('./Toy');
+
+var Ishop = React.createClass({
+
+  displayName: 'Ishop',
 
   propTypes: {
     shopName: React.PropTypes.string.isRequired,
@@ -64,3 +70,5 @@
     );
   },
 });
+
+module.exports = Ishop;
