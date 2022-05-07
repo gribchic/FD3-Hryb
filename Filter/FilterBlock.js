@@ -7,9 +7,9 @@ var FilterBlock = React.createClass({
 
     getInitialState: function () {
         return {
-            arr: [...this.props.data],
             isSorted: false,
             filter: '',
+            list: [...this.props.data]
         };
     },
 
@@ -17,35 +17,34 @@ var FilterBlock = React.createClass({
         this.setState({
             isSorted: false,
             filter: ''
-        });
+        }, this.processList);
     },
 
     onChangeSortHandler: function (value) {
-        this.setState({ isSorted: value });
+        this.setState({ isSorted: value }, this.processList);
     },
 
     onChangeFilterHandler: function (value) {
-        this.setState({ filter: value });
+        this.setState({ filter: value }, this.processList);
     },
 
-    getArrayToRender: function () {
-        let arr = [...this.state.arr];
-
-        if (this.state.isSorted) {
-            arr.sort()
-        }
+    processList: function () {
+        let arr = [...this.props.data];
 
         if (this.state.filter.trim()) {
             arr = arr.filter(item => item.includes(this.state.filter));
         }
+        if (this.state.isSorted) {
+            arr.sort()
+        }
 
-        return arr;
+        this.setState({ list: arr });
     },
 
     render: function () {
-        var arr = this.getArrayToRender().map(v =>
+        var arr = this.state.list.map(v =>
 
-            React.DOM.div({ key: v,className:'list-item' },
+            React.DOM.div({ key: v, className: 'list-item' },
                 v
             ),
         );
@@ -58,7 +57,7 @@ var FilterBlock = React.createClass({
                 isSorted: this.state.isSorted,
                 filter: this.state.filter
             }, null),
-            React.DOM.div({className:'list-wrapper'}, arr),
+            React.DOM.div({ className: 'list-wrapper' }, arr),
         );
     },
 

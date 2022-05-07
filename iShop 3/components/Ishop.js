@@ -1,74 +1,75 @@
-﻿var React = require('react');
+﻿import React from 'react';
+import PropTypes from 'prop-types';
 
-require('./Ishop.css');
+import './Ishop.css';
+import Toy from './Toy';
 
-var Toy = require('./Toy');
+class Ishop extends React.Component {
 
-var Ishop = React.createClass({
-
-  displayName: 'Ishop',
-
-  propTypes: {
-    shopName: React.PropTypes.string.isRequired,
-    toys: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        id: React.PropTypes.number.isRequired,
-        price: React.PropTypes.number.isRequired,
-        name: React.PropTypes.string.isRequired,
-        amount: React.PropTypes.number.isRequired,
-        imgUrl: React.PropTypes.string.isRequired,
+  static propTypes = {
+    shopName: PropTypes.string.isRequired,
+    toys: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        amount: PropTypes.number.isRequired,
+        imgUrl: PropTypes.string.isRequired,
       })
     )
-  },
+  };
 
-  getInitialState: function () {
-    return {
+  constructor(props) {
+    super(props)
+    this.state = {
       toys: [...this.props.toys],
       selectedToyId: null,
-    };
-  },
+    }
+  };
 
-  onSelectToyHandler: function (id) {
+  onSelectToyHandler = (id) => {
     this.setState({ selectedToyId: id })
-  },
+  }
 
-  onDeleteToyHandler: function (id) {
+  onDeleteToyHandler = (id) => {
     if (confirm('are you sure you want to delete this toy?')) {
       this.setState((prevState) => {
         return { toys: prevState.toys.filter(toy => toy.id !== id) }
       })
     }
-  },
+  };
 
-  render: function () {
-
+  render() {
     if (this.state.toys.length === 0) {
-      return React.DOM.div({ className: 'IshopBlock' },
-        React.DOM.h1({ className: 'h1' }, this.props.shopName),
-        React.DOM.div({ className: 'alert' }, 'Sorry. There are no toys!'),
-      );
+      return (
+        <div className='IshopBlock'>
+          <h1 className='h1'>{this.props.shopName}</h1>
+          <div className='alert'>Sorry. There are no toys</div>
+        </div>
+      )
     }
 
-    var toysCode = this.state.toys.map(v =>
+    const toysCode = this.state.toys.map(v =>
+      <div className='toy-container' key={v.id}>
+        <Toy
+          name={v.name}
+          price={v.price}
+          amount={v.amount}
+          imgUrl={v.imgUrl}
+          isSelected={this.state.selectedToyId === v.id}
+          onSelectToy={this.onSelectToyHandler}
+          onDeleteToy={this.onDeleteToyHandler}
+          id={v.id}
+        />
+      </div>);
 
-      React.DOM.div({ className: 'toy-container', key: v.id },
-        React.createElement(Toy, {
-          name: v.name,
-          price: v.price,
-          amount: v.amount,
-          imgUrl: v.imgUrl,
-          isSelected: this.state.selectedToyId === v.id,
-          onSelectToy: this.onSelectToyHandler,
-          onDeleteToy: this.onDeleteToyHandler,
-          id: v.id,
-        }),
-      ),
-    );
-    return React.DOM.div({ className: 'IshopBlock' },
-      React.DOM.h1({ className: 'h1' }, this.props.shopName),
-      React.DOM.div({ className: 'row' }, toysCode),
-    );
-  },
-});
+      return (
+        <div className='IshopBlock'>
+          <h1 className='h1'>{this.props.shopName}</h1>
+          <div className='row'>{toysCode}</div>
+        </div>
+      )
+  }
+};
 
-module.exports = Ishop;
+export default Ishop;

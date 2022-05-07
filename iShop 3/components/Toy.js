@@ -1,49 +1,43 @@
-var React = require('react');
 
-require('./Toy.css');
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Toy.css';
 
-let Toy = React.createClass({
+class Toy extends React.Component {
 
-  displayName: 'Toy',
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    amount: PropTypes.number.isRequired,
+    imgUrl: PropTypes.string.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelectToy: PropTypes.func.isRequired,
+    onDeleteToy: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+  };
 
-  propTypes: {
-    name: React.PropTypes.string.isRequired,
-    price: React.PropTypes.number.isRequired,
-    amount: React.PropTypes.number.isRequired,
-    imgUrl: React.PropTypes.string.isRequired,
-    isSelected: React.PropTypes.bool.isRequired,
-    onSelectToy: React.PropTypes.func.isRequired,
-    onDeleteToy: React.PropTypes.func.isRequired,
-    id: React.PropTypes.number.isRequired,
-  },
-
-  onSelectToyHandler: function (event) {
+  onSelectToyHandler = (event) => {
     this.props.onSelectToy(this.props.id);
-  },
+  };
 
-  onDeleteToyHandler: function (event) {
+  onDeleteToyHandler = (event) => {
     event.stopPropagation();
     this.props.onDeleteToy(this.props.id);
-  },
+  };
 
-  className: function () {
-    return `Toy ${this.props.isSelected ? 'selected' : ''}`;
-  },
-
-  render: function () {
-    return React.DOM.section({ className: this.className(), onClick: this.onSelectToyHandler },
-      React.DOM.h2(null, this.props.name),
-      React.DOM.img({ src: this.props.imgUrl, className: 'img' }),
-      React.DOM.div({ className: 'description' },
-        React.DOM.span({ className: 'price' }, `Price: $${this.props.price}`),
-        React.DOM.span({ className: 'amount' }, `Amount: ${this.props.amount}`),
-      ),
-      React.DOM.button({
-        type: 'button',
-        onClick: this.onDeleteToyHandler
-      }, 'Delete'),
-    )
+  render() {
+    return     (
+      <section className={`Toy ${this.props.isSelected ? 'selected' : ''}`} onClick={this.onSelectToyHandler}>
+        <h2>{this.props.name}</h2>
+        <img src={this.props.imgUrl} className='img'/>
+        <div className='description'>
+          <span className='price'>{`Price: $${this.props.price}`}</span>
+          <span className='amount'>{`Amount: ${this.props.amount}`}</span>
+        </div>
+        <button type='button' onClick={this.onDeleteToyHandler}>Delete</button>
+      </section>
+    );
   }
-});
+};
 
-module.exports = Toy;
+export default Toy;
