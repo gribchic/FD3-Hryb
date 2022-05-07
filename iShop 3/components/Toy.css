@@ -1,3 +1,7 @@
+.Toy {
+  border: 1px solid transparent;
+}
+
 .Toy h2
 {
   text-align: center;
@@ -13,5 +17,5 @@
   justify-content: space-between;
 }
 .Toy.selected {
-  border: 1px solid green;
+  border-color: green;
 }

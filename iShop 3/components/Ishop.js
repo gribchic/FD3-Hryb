@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Ishop.css';
 import Toy from './Toy';
+import ToyDetails from './ToyDetails';
 
 class Ishop extends React.Component {
 
@@ -63,12 +64,24 @@ class Ishop extends React.Component {
         />
       </div>);
 
-      return (
+    const [toySelected] = this.state.toys.filter(toy => toy.id === this.state.selectedToyId);
+
+    return (
+      <React.Fragment>
         <div className='IshopBlock'>
           <h1 className='h1'>{this.props.shopName}</h1>
           <div className='row'>{toysCode}</div>
         </div>
-      )
+        {this.state.selectedToyId !== null &&
+          <ToyDetails
+            id={toySelected.id}
+            name={toySelected.name}
+            amount={toySelected.amount}
+            imgUrl={toySelected.imgUrl}
+            price={toySelected.price}
+          />}
+      </React.Fragment>
+    )
   }
 };
 
