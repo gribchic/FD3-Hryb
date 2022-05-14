@@ -1,0 +1,10 @@
+.br2jsx {
+    width: 100px;
+    height: 100px;
+    background-color: darkgreen;
+    color: white;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
