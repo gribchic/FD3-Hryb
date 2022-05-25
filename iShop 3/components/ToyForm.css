@@ -1,0 +1,19 @@
+.ToyForm {
+    display: block;
+    margin: auto;
+    width: 435px;
+    padding: 1rem;
+    margin-top: 2rem;
+    border: 7px double gray;
+    background-color: lightgray;
+}
+.form-control {
+    display: block;
+    width: 100%;
+}
+.form-validator {
+    color: red;
+}
+.form-group {
+    margin-bottom: 1rem;
+}

@@ -24,3 +24,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+
+.IshopBlock footer {
+  text-align: right;
+  padding: 1rem 0;
+}

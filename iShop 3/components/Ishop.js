@@ -23,18 +23,20 @@ class Ishop extends React.Component {
 
   constructor(props) {
     super(props);
-    const maxId = Math.max(...this.props.toys.map(toy => toy.id));
+    const nextId = Math.max(...this.props.toys.map(toy => toy.id)) + 1;
 
     this.state = {
       toys: [...this.props.toys],
       selectedToyId: null,
+      selectedToy: {},
       mode: 0,
-      maxId
+      nextId
     }
   };
 
   onSelectToyHandler = (id) => {
-    this.setState({ selectedToyId: id })
+    const selectedToy = this.state.toys.find(toy => toy.id === id);
+    this.setState({ selectedToy });
   }
 
   onDeleteToyHandler = (id) => {
@@ -46,26 +48,26 @@ class Ishop extends React.Component {
   };
 
   onEditToyHandler = (id) => {
-    console.log(id);
+    const selectedToy = this.state.toys.find(toy => toy.id === id);
+    this.setState({ selectedToy, mode: 2 });
+    console.log(selectedToy);
   };
 
   newToyHandler = () => {
     console.log('new');
-    this.setState(
-      {
-        mode: 1,
-        selectedToyId: null,
-      }
-    )
+    this.setState({
+      mode: 1,
+      selectedToy: {},
+    })
   }
 
   onCancelHandler = () => {
-    this.setState({ mode: 0 })
+    this.setState({ mode: 0, selectedToy: {} })
   }
 
-  onSaveHandler = (item) => {
+  onCreateHandler = (item) => {
     const toy = {
-      id: this.state.maxId + 1,
+      id: this.state.nextId,
       amount: item.amount,
       imgUrl: item.imgUrl,
       price: item.price,
@@ -73,6 +75,25 @@ class Ishop extends React.Component {
 
     };
     const arr = [...this.state.toys, toy];
+    const nextId = this.state.nextId + 1;
+
+    this.setState({ mode: 0, toys: arr, nextId });
+  }
+
+  onUpdateHandler = (item) => {
+    const toy = {
+      id: item.id,
+      amount: item.amount,
+      imgUrl: item.imgUrl,
+      price: item.price,
+      name: item.name
+    };
+
+    const arr = [...this.state.toys];
+    const ind = arr.findIndex(item => item.id === toy.id);
+
+    arr.splice(ind, 1, toy);
+
     this.setState({ mode: 0, toys: arr });
   }
 
@@ -93,39 +114,49 @@ class Ishop extends React.Component {
           price={v.price}
           amount={v.amount}
           imgUrl={v.imgUrl}
-          isSelected={this.state.selectedToyId === v.id}
+          isSelected={this.state.selectedToy.id === v.id}
           onSelectToy={this.onSelectToyHandler}
           onDeleteToy={this.onDeleteToyHandler}
           onEditToy={this.onEditToyHandler}
           id={v.id}
-          isEditMode={this.state.mode === 1}
+          isEditMode={this.state.mode !== 0}
         />
       </div>);
 
-    const [toySelected] = this.state.toys.filter(toy => toy.id === this.state.selectedToyId);
+
 
     return (
       <React.Fragment>
         <div className='IshopBlock'>
           <h1 className='h1'>{this.props.shopName}</h1>
           <div className='row'>{toysCode}</div>
+          <footer>
+            {this.state.mode === 0 &&
+              <button type='button' onClick={this.newToyHandler}>New Product</button>}
+          </footer>
         </div>
-        {this.state.mode === 0 &&
-          <button type='button' onClick={this.newToyHandler}>New Product</button>}
+
         {this.state.mode === 1 &&
           <ToyForm
-            id={this.state.maxId}
+            id={this.state.nextId}
             onCancel={this.onCancelHandler}
-            onSave={this.onSaveHandler}
+            onSave={this.onCreateHandler}
           />
         }
-        {this.state.selectedToyId !== null &&
+        {this.state.mode === 2 &&
+          <ToyForm
+            onCancel={this.onCancelHandler}
+            onSave={this.onUpdateHandler}
+            {...this.state.selectedToy}
+          />
+        }
+        {this.state.selectedToy.id !== undefined && this.state.mode === 0 &&
           <ToyDetails
-            id={toySelected.id}
-            name={toySelected.name}
-            amount={toySelected.amount}
-            imgUrl={toySelected.imgUrl}
-            price={toySelected.price}
+            id={this.state.selectedToy.id}
+            name={this.state.selectedToy.name}
+            amount={this.state.selectedToy.amount}
+            imgUrl={this.state.selectedToy.imgUrl}
+            price={this.state.selectedToy.price}
           />}
       </React.Fragment>
     )

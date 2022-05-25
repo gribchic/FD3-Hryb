@@ -15,7 +15,7 @@ class ToyDetails extends React.Component {
 
     render() {
         return (
-            <section>
+            <section className="ToyDetails">
                 <h2>Toy Details</h2>
                 <div className='row'>
                     <label>Name</label>
@@ -23,7 +23,7 @@ class ToyDetails extends React.Component {
                 </div>
                 <div className='row'>
                     <label>Image</label>
-                    <div>{this.props.imageUrl}</div>
+                    <div>{this.props.imgUrl}</div>
                 </div>
                 <div className='row'>
                     <label>Price</label>

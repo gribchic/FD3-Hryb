@@ -2,8 +2,8 @@
     {
         "name": "Taddy 1",
         "id": 1,
-        "amount": 222,
-        "price": 22.99,
+        "amount": 111,
+        "price": 11.99,
         "imgUrl": "https://karls-shop.b-cdn.net/media/f7/2b/24/1633006311/Teddy.png"
     },
     {
@@ -16,15 +16,15 @@
     {
         "name": "Taddy 3",
         "id": 3,
-        "amount": 222,
-        "price": 22.99,
+        "amount": 333,
+        "price": 33.99,
         "imgUrl": "https://karls-shop.b-cdn.net/media/f7/2b/24/1633006311/Teddy.png"
     },
     {
         "name": "Taddy 4",
         "id": 4,
-        "amount": 222,
-        "price": 22.99,
+        "amount": 444,
+        "price": 44.99,
         "imgUrl": "https://karls-shop.b-cdn.net/media/f7/2b/24/1633006311/Teddy.png"
     }
 ]

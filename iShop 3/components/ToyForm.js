@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 import { Required, isUrl, isPositiveInteger, isPrice } from "../utils/validators";
+import "./ToyForm.css";
 
 class ToyForm extends React.Component {
     static propTypes = {
@@ -12,10 +13,10 @@ class ToyForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            price: '',
-            imgUrl: '',
-            amount: ''
+            name: this.props.name || '',
+            price: this.props.price || '',
+            imgUrl: this.props.imgUrl || '',
+            amount: this.props.amount || ''
         }
     }
 
@@ -27,9 +28,10 @@ class ToyForm extends React.Component {
         event.preventDefault();
         const toy = {
             name: this.state.name,
-            price: parseFloat(this.state.price),
+            price: Number(this.state.price),
             imgUrl: this.state.imgUrl,
-            amount: parseInt(this.state.amount)
+            amount: Number(this.state.amount),
+            id: this.props.id
         }
         this.props.onSave(toy);
     }
@@ -50,10 +52,10 @@ class ToyForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmitHandler}>
-                <div>Toy id: {this.props.id + 1}</div>
-                <div>
-                    <label htmlFor="name">Name</label>
+            <form onSubmit={this.onSubmitHandler} className="ToyForm">
+                <h2>Toy id: {this.props.id}</h2>
+                <div className="form-group">
+                    <label htmlFor="name" className="form-control-label">Name</label>
                     <input
                         className="form-control"
                         type="text"
@@ -65,8 +67,8 @@ class ToyForm extends React.Component {
                     {!Required(this.state.name) &&
                         <span className="form-validator">Please, fill the  field. Value must be a string</span>}
                 </div>
-                <div>
-                    <label htmlFor="price">Price</label>
+                <div className="form-group">
+                    <label htmlFor="price" className="form-control-label">Price</label>
                     <input
                         className="form-control"
                         type="text"
@@ -78,8 +80,8 @@ class ToyForm extends React.Component {
                     {!isPrice(this.state.price) &&
                         <span className="form-validator">Please, fill the  field. Value must be a retional number greater than 0</span>}
                 </div>
-                <div>
-                    <label htmlFor="url">URL</label>
+                <div className="form-group">
+                    <label htmlFor="imgUrl" className="form-control-label">URL</label>
                     <input
                         className="form-control"
                         type="text"
@@ -91,8 +93,8 @@ class ToyForm extends React.Component {
                     {!isUrl(this.state.imgUrl) &&
                         <span className="form-validator">Please, fill the  field. Value must be a valid URL</span>}
                 </div>
-                <div>
-                    <label htmlFor="amount">Amount</label>
+                <div className="form-group">
+                    <label htmlFor="amount" className="form-control-label">Amount</label>
                     <input
                         className="form-control"
                         type="text"
