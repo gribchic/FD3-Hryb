@@ -35,8 +35,7 @@ class Ishop extends React.Component {
   };
 
   onSelectToyHandler = (id) => {
-    //const selectedToy = this.state.toys.find(toy => toy.id === id);
-    this.setState({ selectedToyId:id });
+    this.setState({ selectedToyId: id });
   }
 
   onDeleteToyHandler = (id) => {
@@ -48,7 +47,7 @@ class Ishop extends React.Component {
 
   onEditToyHandler = (id) => {
     const selectedToy = this.state.toys.find(toy => toy.id === id);
-    this.setState({ selectedToy, mode: 2, selectedToyId:id });
+    this.setState({ selectedToy, mode: 2, selectedToyId: id });
   };
 
   newToyHandler = () => {
@@ -120,11 +119,11 @@ class Ishop extends React.Component {
           isEditMode={this.state.mode !== 0}
         />
       </div>);
-      const selectedToy = this.state.toys.find(toy=>toy.id===this.state.selectedToyId);
+    const selectedToy = this.state.toys.find(toy => toy.id === this.state.selectedToyId);
 
 
     return (
-      
+
       <React.Fragment>
         <div className='IshopBlock'>
           <h1 className='h1'>{this.props.shopName}</h1>
@@ -149,7 +148,7 @@ class Ishop extends React.Component {
             {...this.state.selectedToy}
           />
         }
-        
+
         {this.state.selectedToyId !== null && this.state.mode === 0 &&
           <ToyDetails
             id={selectedToy.id}
