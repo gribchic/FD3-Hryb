@@ -35,22 +35,20 @@ class Ishop extends React.Component {
   };
 
   onSelectToyHandler = (id) => {
-    const selectedToy = this.state.toys.find(toy => toy.id === id);
-    this.setState({ selectedToy });
+    //const selectedToy = this.state.toys.find(toy => toy.id === id);
+    this.setState({ selectedToyId:id });
   }
 
   onDeleteToyHandler = (id) => {
     if (confirm('are you sure you want to delete this toy?')) {
-      this.setState((prevState) => {
-        return { toys: prevState.toys.filter(toy => toy.id !== id) }
-      })
+      this.setState({ toys: this.state.toys.filter(toy => toy.id !== id) }
+      )
     }
   };
 
   onEditToyHandler = (id) => {
     const selectedToy = this.state.toys.find(toy => toy.id === id);
-    this.setState({ selectedToy, mode: 2 });
-    console.log(selectedToy);
+    this.setState({ selectedToy, mode: 2, selectedToyId:id });
   };
 
   newToyHandler = () => {
@@ -114,7 +112,7 @@ class Ishop extends React.Component {
           price={v.price}
           amount={v.amount}
           imgUrl={v.imgUrl}
-          isSelected={this.state.selectedToy.id === v.id}
+          isSelected={this.state.selectedToyId === v.id}
           onSelectToy={this.onSelectToyHandler}
           onDeleteToy={this.onDeleteToyHandler}
           onEditToy={this.onEditToyHandler}
@@ -122,10 +120,11 @@ class Ishop extends React.Component {
           isEditMode={this.state.mode !== 0}
         />
       </div>);
-
+      const selectedToy = this.state.toys.find(toy=>toy.id===this.state.selectedToyId);
 
 
     return (
+      
       <React.Fragment>
         <div className='IshopBlock'>
           <h1 className='h1'>{this.props.shopName}</h1>
@@ -150,13 +149,14 @@ class Ishop extends React.Component {
             {...this.state.selectedToy}
           />
         }
-        {this.state.selectedToy.id !== undefined && this.state.mode === 0 &&
+        
+        {this.state.selectedToyId !== null && this.state.mode === 0 &&
           <ToyDetails
-            id={this.state.selectedToy.id}
-            name={this.state.selectedToy.name}
-            amount={this.state.selectedToy.amount}
-            imgUrl={this.state.selectedToy.imgUrl}
-            price={this.state.selectedToy.price}
+            id={selectedToy.id}
+            name={selectedToy.name}
+            amount={selectedToy.amount}
+            imgUrl={selectedToy.imgUrl}
+            price={selectedToy.price}
           />}
       </React.Fragment>
     )
